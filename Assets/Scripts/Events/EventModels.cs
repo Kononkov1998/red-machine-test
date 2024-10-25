@@ -10,6 +10,11 @@ namespace Events
             {
                 
             }
+            
+            public struct EmptySpaceTapped : IEvent
+            {
+                
+            }
 
             public struct PlayerFingerRemoved : IEvent
             {
@@ -19,6 +24,11 @@ namespace Events
             public struct TargetColorNodesFilled : IEvent
             {
                 
+            }
+            
+            public struct CameraBoundsRecalculated : IEvent
+            {
+                public Bounds Bounds;
             }
         }
     }

@@ -10,7 +10,7 @@ namespace Connection
 {
     public class ColorConnectionManager : MonoBehaviour
     {
-        [SerializeField] private GameObject colorNodesContainer;
+        [SerializeField] private ColorNodesContainer colorNodesContainer;
         [SerializeField] private ColorConnector colorConnector;
 
         private ClickHandler _clickHandler;
@@ -26,11 +26,11 @@ namespace Connection
         private ColorConnector _currentColorConnector;
 
 
-        private void Awake()
+        private void Start()
         {
-            _nodes = colorNodesContainer.GetComponentsInChildren<ColorNode>();
+            _nodes = colorNodesContainer.Nodes;
 
-            var nodeTargets = colorNodesContainer.GetComponentsInChildren<ColorNodeTarget>(true);
+            var nodeTargets = colorNodesContainer.NodeTargets;
             foreach (var nodeTarget in nodeTargets)
             {
                 nodeTarget.TargetCompletionChangeEvent += OnTargetCompletionChange;
@@ -38,12 +38,14 @@ namespace Connection
             }
 
             _clickHandler = ClickHandler.Instance;
-            _clickHandler.SetDragEventHandlers(OnDragStart, OnDragEnd);
+            _clickHandler.DragStartEvent += OnDragStart;
+            _clickHandler.DragEndEvent += OnDragEnd;
         }
 
         private void OnDestroy()
         {
-            _clickHandler.ClearEvents();
+            _clickHandler.DragStartEvent -= OnDragStart;
+            _clickHandler.DragEndEvent -= OnDragEnd;
         }
 
         private void StartConnecting(ColorNode colorNode)

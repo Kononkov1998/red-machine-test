@@ -71,19 +71,5 @@ namespace Player.ActionHandlers
                 _isDrag = true;
             }
         }
-
-        public void SetDragEventHandlers(Action<Vector3> dragStartEvent, Action<Vector3> dragEndEvent)
-        {
-            ClearEvents();
-
-            DragStartEvent = dragStartEvent;
-            DragEndEvent = dragEndEvent;
-        }
-
-        public void ClearEvents()
-        {
-            DragStartEvent = null;
-            DragEndEvent = null;
-        }
     }
 }
