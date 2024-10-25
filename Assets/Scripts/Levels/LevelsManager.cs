@@ -18,10 +18,15 @@ namespace Levels
             EventsController.Subscribe<EventModels.Game.TargetColorNodesFilled>(this, OnTargetColorNodesFilled);
         }
 
+        public void GoToLevel(int index)
+        {
+            ScenesChanger.GotoScene(string.Format(LevelNamePattern, index));
+        }
+
         private void OnTargetColorNodesFilled(EventModels.Game.TargetColorNodesFilled e)
         {
             _currentLevelIndex += 1;
-            ScenesChanger.GotoScene(string.Format(LevelNamePattern, _currentLevelIndex));
+            GoToLevel(_currentLevelIndex);
         }
     }
 }
