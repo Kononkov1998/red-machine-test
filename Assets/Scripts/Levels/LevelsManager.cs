@@ -20,13 +20,13 @@ namespace Levels
 
         public void GoToLevel(int index)
         {
+            _currentLevelIndex = index;
             ScenesChanger.GotoScene(string.Format(LevelNamePattern, index));
         }
 
         private void OnTargetColorNodesFilled(EventModels.Game.TargetColorNodesFilled e)
         {
-            _currentLevelIndex += 1;
-            GoToLevel(_currentLevelIndex);
+            GoToLevel(_currentLevelIndex + 1);
         }
     }
 }
